@@ -7,3 +7,5 @@ This project is programmed in Presentation.
 Designed to interface with MP150 Biopac system via Parallel port.
 
 This version impliments extinction phase A with additional inter trial stimulus and no rating screen.
+
+Built from PavlovianConditioningTaskBNR
