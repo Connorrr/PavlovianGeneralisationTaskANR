@@ -247,7 +247,7 @@ trial {
 }fixation_trial;
 
 trial {
-	trial_duration = 10000;
+	trial_duration = 8000;
 	#trial_type = fixed;
 	trial_type = specific_response;
 	terminator_button = 5,6,7,8,9,10,11,12,13,14,15;
@@ -273,7 +273,7 @@ picture {
 } CSm_pic;
 
 trial {
-	trial_duration = 8000;
+	trial_duration = 6000;
 	#trial_type = fixed;
 	trial_type = specific_response;
 	terminator_button = 5,6,7,8,9,10,11,12,13,14,15;
@@ -286,7 +286,7 @@ trial {
 } CSm_trial;
 
 trial {
-	trial_duration = 6000;
+	trial_duration = 8000;
 	trial_type = fixed;
 	picture CSm_pic;
 } CSm_bare_trial;
@@ -297,7 +297,7 @@ picture {
 } CSDA_pic;
 
 trial {
-	trial_duration = 10000;
+	trial_duration = 8000;
 	#trial_type = fixed;
 	trial_type = specific_response;
 	terminator_button = 5,6,7,8,9,10,11,12,13,14,15;
@@ -312,7 +312,7 @@ trial {
 } CSDA_trial;
 
 trial {
-	trial_duration = 10000;
+	trial_duration = 8000;
 	trial_type = fixed;
 	picture CSDA_pic;
 } CSDA_bare_trial;
@@ -323,7 +323,7 @@ picture {
 } CSDB_pic;
 
 trial {
-	trial_duration = 10000;
+	trial_duration = 8000;
 	#trial_type = fixed;
 	trial_type = specific_response;
 	terminator_button = 5,6,7,8,9,10,11,12,13,14,15;
@@ -338,7 +338,7 @@ trial {
 } CSDB_trial;
 
 trial {
-	trial_duration = 10000;
+	trial_duration = 8000;
 	trial_type = fixed;
 	picture CSDB_pic;
 } CSDB_bare_trial;
@@ -349,7 +349,7 @@ picture {
 } CSDC_pic;
 
 trial {
-	trial_duration = 10000;
+	trial_duration = 8000;
 	#trial_type = fixed;
 	trial_type = specific_response;
 	terminator_button = 5,6,7,8,9,10,11,12,13,14,15;
@@ -364,7 +364,7 @@ trial {
 } CSDC_trial;
 
 trial {
-	trial_duration = 10000;
+	trial_duration = 8000;
 	trial_type = fixed;
 	picture CSDC_pic;
 } CSDC_bare_trial;
@@ -375,7 +375,7 @@ picture {
 } CSDD_pic;
 
 trial {
-	trial_duration = 10000;
+	trial_duration = 8000;
 	#trial_type = fixed;
 	trial_type = specific_response;
 	terminator_button = 5,6,7,8,9,10,11,12,13,14,15;
@@ -390,7 +390,7 @@ trial {
 } CSDD_trial;
 
 trial {
-	trial_duration = 10000;
+	trial_duration = 8000;
 	trial_type = fixed;
 	picture CSDD_pic;
 } CSDD_bare_trial;

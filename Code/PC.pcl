@@ -43,7 +43,7 @@ oport.set_pulse_width( 5 );
 oport.send_code( 255 );
 
 fixation_trial.set_duration(5000/SPEED_UP);
-CSp_trial.set_duration(10000/SPEED_UP);
+CSp_trial.set_duration(8000/SPEED_UP);
 CSm_trial.set_duration(8000/SPEED_UP);
 CSm_trial2.set_duration(2000/SPEED_UP);
 blank_trial.set_duration(5000/SPEED_UP);
@@ -182,7 +182,7 @@ end;
 ############## Aquisition Phase ##################
 build_stim_list(NUM_EXTINCT, IS_CSM);
 sort_stim_list(NUM_EXTINCT, Group_No, IS_CSM);
-CSm_trial.set_duration(10000/SPEED_UP);
+CSm_trial.set_duration(60000/SPEED_UP);
 phase = 2;
 print_1d_bool_array(IS_CSM);
 CSm_bare_trial.set_duration(8000);		##  Set duration to 8 seconds to compensate gor no growl
