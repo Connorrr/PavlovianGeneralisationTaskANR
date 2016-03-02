@@ -1,5 +1,4 @@
 student number: 	Age: 18	Gender: 1	Group: 1
-Phase	Trial Number	Dog	Expectancy	Evaluation
-2	1	1
-2	2	1
-2	3	2
+Phase	Trial Number	Dog	Extinction Dog
+1	1	1
+1	2	1

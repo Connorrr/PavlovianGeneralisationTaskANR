@@ -205,6 +205,17 @@ begin
 	out.print(string(dog) + "\n");
 
 end;
+
+sub
+save_extinction_trail_data(int phase, int trial_num, int dog, output_file out, int dog2)
+begin
+
+	out.print(string(phase) + "\t");
+	out.print(string(trial_num) + "\t");
+	out.print(string(dog) + "\t");
+	out.print(string(dog2) + "\n");
+
+end;
 #
 sub int num_str_2_int(string str_num)
 begin
