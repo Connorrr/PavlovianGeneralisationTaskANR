@@ -57,7 +57,7 @@ build_stim_list(NUM_AQUI, IS_CSM);
 sort_stim_list(NUM_AQUI, Group_No, IS_CSM);
 ##  Build Extinction Inter Trial Stim List
 build_stim_list(NUM_EXTINCT,IS_CSDA);
-sort_stim_list(NUM_EXTINCT, Group_No, IS_CSDA);
+sort_stim_list(NUM_EXTINCT, random(1,2), IS_CSDA);
 
 # for testing purpose
 /*build_stim_list(NUM_AQUI, IS_POLY2);
@@ -187,6 +187,8 @@ phase = 2;
 print_1d_bool_array(IS_CSM);
 CSm_bare_trial.set_duration(8000);		##  Set duration to 8 seconds to compensate gor no growl
 int dog2 = 0;
+term.print_line("CSDA:");
+print_1d_bool_array(IS_CSDA);
 ############## Extinction  Phase ##################
 if (!SKIP_EXTINCT) then
 	loop 
