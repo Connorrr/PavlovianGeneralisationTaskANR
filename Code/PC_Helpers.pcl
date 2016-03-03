@@ -197,23 +197,25 @@ begin
 end;
 
 sub
-save_trail_data(int phase, int trial_num, int dog, output_file out)
+save_trail_data(int phase, int trial_num, int dog, output_file out, string tt)
 begin
 
 	out.print(string(phase) + "\t");
 	out.print(string(trial_num) + "\t");
-	out.print(string(dog) + "\n");
+	out.print(string(dog) + "\t\t");
+	out.print(tt + "\n");
 
 end;
 
 sub
-save_extinction_trail_data(int phase, int trial_num, int dog, output_file out, int dog2)
+save_extinction_trail_data(int phase, int trial_num, int dog, output_file out, int dog2, string tt)
 begin
 
 	out.print(string(phase) + "\t");
 	out.print(string(trial_num) + "\t");
 	out.print(string(dog) + "\t");
-	out.print(string(dog2) + "\n");
+	out.print(string(dog2) + "\t");
+	out.print(tt + "\n");
 
 end;
 #
