@@ -159,17 +159,20 @@ if (!SKIP_AQUI) then
 		
 			if (IS_CSM[i] == false) then
 				#
+				oport.send_code( 2 );
 				CSp_bare_trial.present();
+				oport.send_code( 2 );
 				dog = 1;
 				if (Stim_Group != 1) then
 					dog = 2;
 				end;
 				trial_type = "CS-";
 			else
-				
+				oport.send_code( 1 );
 				CSm_bare_trial.present();
-				
+				oport.send_code( 64 );
 				CSm_trial2.present();
+				oport.send_code( 1 );
 				dog = 2;
 				if (Stim_Group != 1) then
 					dog = 1;
@@ -212,7 +215,9 @@ if (!SKIP_EXTINCT) then
 		end;
 		
 			if (IS_CSM[i] == false) then 
+				oport.send_code( 2 );
 				CSp_bare_trial.present();
+				oport.send_code( 2 );
 				
 				dog = 1;
 				if (Stim_Group != 1) then
@@ -220,8 +225,9 @@ if (!SKIP_EXTINCT) then
 				end;
 				trial_type = "CS-";
 			else
+				oport.send_code( 1 );
 				CSm_bare_trial.present();
-				
+				oport.send_code( 1 );
 				dog = 2;
 				if (Stim_Group != 1) then
 					dog = 1;
@@ -232,12 +238,16 @@ if (!SKIP_EXTINCT) then
 			if (IS_CSDA[i])then		##  Inter trial stim
 				fixation_trial.set_duration(15000);
 				fixation_trial.present();
+				oport.send_code( 4 );
 				CSDA_bare_trial.present();
+				oport.send_code( 4 );
 				dog2 = 3;
 			else
 				fixation_trial.set_duration(15000);
 				fixation_trial.present();
+				oport.send_code( 8 );
 				CSDB_bare_trial.present();
+				oport.send_code( 8 );
 				dog2 = 4;
 			end;
 			#blank_trial.present();
@@ -290,12 +300,16 @@ if (!SKIP_GEN)then
 		end;
 		
 			if (IS_CSDC[i] == false) then 
+				oport.send_code( 16 );
 				CSDC_bare_trial.present();
+				oport.send_code( 16 );
 				
 				dog = 5;
 				trial_type = "CSDC";
 			else
+				oport.send_code( 32 );
 				CSDD_bare_trial.present();
+				oport.send_code( 32 );
 				
 				dog = 6;
 				trial_type = "CSDD";
@@ -328,7 +342,9 @@ begin
 	end;
 	
 		if (IS_CSM_TEST[i] == false) then 
+			oport.send_code( 2 );
 			CSp_bare_trial.present();
+			oport.send_code( 2 );
 			
 			dog = 1;
 			if (Stim_Group != 1) then
@@ -336,8 +352,9 @@ begin
 			end;
 			trial_type = "CS-";
 		else
+			oport.send_code( 1 );
 			CSm_bare_trial.present();
-			
+			oport.send_code( 1 );
 			dog = 2;
 			if (Stim_Group != 1) then
 				dog = 1;
