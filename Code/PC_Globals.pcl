@@ -17,6 +17,9 @@ int NUM_REIN = 3;
 int NUM_TEST = 6;
 int NUM_TEST_EXT = 4;
 
+int RAND_WAIT_MIN = 15000;
+int RAND_WAIT_MAX = 25000;
+
 #### Globals for Pavlovian Conditioning ####
 array <bool> IS_CSM[24];
 array <bool> IS_CSDA[NUM_EXTINCT];				## inter trial stimulus for extinction phase
