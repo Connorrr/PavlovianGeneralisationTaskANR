@@ -45,7 +45,7 @@ oport.send_code( 255 );
 fixation_trial.set_duration(5000/SPEED_UP);
 CSp_trial.set_duration(8000/SPEED_UP);
 CSm_trial.set_duration(8000/SPEED_UP);
-CSm_trial2.set_duration(2000/SPEED_UP);
+#CSm_trial2.set_duration(2000/SPEED_UP);
 blank_trial.set_duration(5000/SPEED_UP);
 CSm_rating_trial.set_duration(5000/SPEED_UP);
 CSp_rating_trial.set_duration(5000/SPEED_UP);
@@ -141,7 +141,7 @@ end;
 #print_1d_bool_array(IS_CSM);
 
 phase = 1;
-
+fixation_trial.set_duration(5000);
 ############## Aquisition Phase ##################
 if (!SKIP_AQUI) then
 	int i=0;
@@ -150,7 +150,9 @@ if (!SKIP_AQUI) then
 	until 
 		i > NUM_AQUI
 	begin
-		fixation_trial.set_duration(random(RAND_WAIT_MIN, RAND_WAIT_MAX));
+		if (i != 1) then
+			fixation_trial.set_duration(random(RAND_WAIT_MIN, RAND_WAIT_MAX));
+		end;
 		fixation_trial.present();
 		
 			if (IS_CSM[i] == false) then
@@ -165,7 +167,7 @@ if (!SKIP_AQUI) then
 				trial_type = "CS-";
 			else
 				oport.send_code( 1 );
-				CSm_bare_trial.present();
+				CSm_short_bare_trial.present();
 				oport.send_code( 64 );
 				CSm_trial2.present();
 				oport.send_code( 1 );
