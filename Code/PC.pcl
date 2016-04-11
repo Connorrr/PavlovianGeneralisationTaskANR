@@ -57,7 +57,7 @@ build_stim_list(NUM_AQUI, IS_CSM);
 sort_stim_list(NUM_AQUI, Group_No, IS_CSM);
 ##  Build Extinction Inter Trial Stim List
 build_stim_list(NUM_EXTINCT,IS_CSDA);
-sort_stim_list(NUM_EXTINCT, random(1,2), IS_CSDA);
+sort_stim_list(NUM_EXTINCT, Group_No, IS_CSDA);
 
 # for testing purpose
 /*build_stim_list(NUM_AQUI, IS_POLY2);
@@ -138,10 +138,10 @@ if (!SKIP_TEST) then
 	break_trial.present();
 end;
 
-print_1d_bool_array(IS_CSM);
+#print_1d_bool_array(IS_CSM);
 
 phase = 1;
-
+fixation_trial.set_duration(5000);
 ############## Aquisition Phase ##################
 if (!SKIP_AQUI) then
 	int i=0;
@@ -150,12 +150,10 @@ if (!SKIP_AQUI) then
 	until 
 		i > NUM_AQUI
 	begin
-		
-		fixation_trial.present();
-		
-		if (i == 1)then
-			fixation_trial.set_duration(38000);		#   Change break to 38 seconds
+		if (i != 1) then
+			fixation_trial.set_duration(random(RAND_WAIT_MIN, RAND_WAIT_MAX));
 		end;
+		fixation_trial.present();
 		
 			if (IS_CSM[i] == false) then
 				#
@@ -168,8 +166,13 @@ if (!SKIP_AQUI) then
 				end;
 				trial_type = "CS-";
 			else
+<<<<<<< HEAD
 				#oport.send_code( 1 );
 				#CSm_bare_trial.present();
+=======
+				oport.send_code( 1 );
+				CSm_short_bare_trial.present();
+>>>>>>> a7f48ba12eb7f1f720a142202e0793fdaeb17c90
 				oport.send_code( 64 );
 				CSm_trial2.present();
 				oport.send_code( 1 );
@@ -188,7 +191,6 @@ if (!SKIP_AQUI) then
 		term.print("\n");
 		i = i + 1;
 	end;
-	fixation_trial.set_duration(5000);
 	break_trial.present();
 end;
 ############## Aquisition Phase ##################
@@ -201,6 +203,7 @@ CSm_bare_trial.set_duration(8000);		##  Set duration to 8 seconds to compensate 
 int dog2 = 0;
 term.print_line("CSDA:");
 print_1d_bool_array(IS_CSDA);
+fixation_trial.set_duration(5000);
 ############## Extinction  Phase ##################
 if (!SKIP_EXTINCT) then
 	loop 
@@ -208,11 +211,8 @@ if (!SKIP_EXTINCT) then
 	until 
 		i > NUM_EXTINCT
 	begin
-		fixation_trial.present();
 		
-		if (i == 1)then
-			fixation_trial.set_duration(38000);		#   Change break to 38 seconds
-		end;
+		fixation_trial.present();
 		
 			if (IS_CSM[i] == false) then 
 				oport.send_code( 2 );
@@ -284,7 +284,6 @@ end;
 build_test_stim_list(NUM_GENERALISATION, IS_CSDC, Group_No);
 CSm_trial.set_duration(10000/SPEED_UP);
 phase = 3;
-fixation_trial.set_duration(5000);
 print_1d_bool_array(IS_CSDC);
 #################### Generalisation  Phase ##################
 if (!SKIP_GEN)then
@@ -293,11 +292,8 @@ if (!SKIP_GEN)then
 	until 
 		i > NUM_GENERALISATION
 	begin
+		fixation_trial.set_duration(random(RAND_WAIT_MIN, RAND_WAIT_MAX));
 		fixation_trial.present();
-		
-		if (i == 1)then
-			fixation_trial.set_duration(38000);
-		end;
 		
 			if (IS_CSDC[i] == false) then 
 				oport.send_code( 16 );
@@ -324,7 +320,6 @@ if (!SKIP_GEN)then
 	break_trial.present();
 end;
 #################### Generalisation  Phase ##################
-fixation_trial.set_duration(5000);
 build_test_stim_list(NUM_GENERALISATION, IS_CSM_TEST, Group_No);
 CSm_trial.set_duration(10000/SPEED_UP);
 phase = 4;
@@ -335,11 +330,8 @@ loop
 until 
 	i > NUM_TEST_EXT
 begin
+	fixation_trial.set_duration(random(RAND_WAIT_MIN, RAND_WAIT_MAX));
 	fixation_trial.present();
-	
-	if (i == 1) then
-		fixation_trial.set_duration(38000);
-	end;
 	
 		if (IS_CSM_TEST[i] == false) then 
 			oport.send_code( 2 );

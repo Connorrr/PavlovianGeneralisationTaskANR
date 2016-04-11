@@ -17,13 +17,16 @@ int NUM_REIN = 3;
 int NUM_TEST = 6;
 int NUM_TEST_EXT = 4;
 
+int RAND_WAIT_MIN = 15000;
+int RAND_WAIT_MAX = 25000;
+
 #### Globals for Pavlovian Conditioning ####
 array <bool> IS_CSM[24];
 array <bool> IS_CSDA[NUM_EXTINCT];				## inter trial stimulus for extinction phase
 array <bool> IS_CSDC[NUM_GENERALISATION];
 array <bool> IS_CSM_TEST[NUM_TEST_EXT];
 
-bool SKIP_TEST = true;		#set true to skip test trial at the beginning 
+bool SKIP_TEST = true;		#set true to skip practice test trial at the beginning 
 
 bool SKIP_AQUI = false;		#set to true to skip Aquisition phase
 bool SKIP_EXTINCT = false;	#set true to skip Extinction phase

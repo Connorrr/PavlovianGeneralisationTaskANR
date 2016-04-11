@@ -1,0 +1,9 @@
+Scenario - PC
+Logfile written - 04/04/2016 11:38:58
+
+Subject	Trial	Event Type	Code	Time	TTime	Uncertainty	Duration	Uncertainty	ReqTime	ReqDur	Stim Type	Pair Index
+
+	1	Response	1	25002	14836	1
+	2	Response	1	27081	1920	1
+	3	Response	1	28601	1441	1
+	6	Quit		213480	55866

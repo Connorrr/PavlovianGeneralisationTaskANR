@@ -291,6 +291,12 @@ trial {
 	picture CSm_pic;
 } CSm_bare_trial;
 
+trial {
+	trial_duration = 5000;
+	trial_type = fixed;
+	picture CSm_pic;
+} CSm_short_bare_trial;
+
 picture {
 	bitmap CSDA;
 	x = 0; y = 0;
@@ -397,6 +403,10 @@ trial {
 
 trial {
 	trial_duration = 3000;
+<<<<<<< HEAD
+=======
+	trial_type = fixed;
+>>>>>>> a7f48ba12eb7f1f720a142202e0793fdaeb17c90
 	picture CSm_pic;
 	sound {wavefile snarl; }CSm_sound;
 } CSm_trial2;
