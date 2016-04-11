@@ -45,7 +45,7 @@ oport.send_code( 255 );
 fixation_trial.set_duration(5000/SPEED_UP);
 CSp_trial.set_duration(8000/SPEED_UP);
 CSm_trial.set_duration(8000/SPEED_UP);
-CSm_trial2.set_duration(2000/SPEED_UP);
+#CSm_trial2.set_duration(2000/SPEED_UP);
 blank_trial.set_duration(5000/SPEED_UP);
 CSm_rating_trial.set_duration(5000/SPEED_UP);
 CSp_rating_trial.set_duration(5000/SPEED_UP);
@@ -168,8 +168,8 @@ if (!SKIP_AQUI) then
 				end;
 				trial_type = "CS-";
 			else
-				oport.send_code( 1 );
-				CSm_bare_trial.present();
+				#oport.send_code( 1 );
+				#CSm_bare_trial.present();
 				oport.send_code( 64 );
 				CSm_trial2.present();
 				oport.send_code( 1 );

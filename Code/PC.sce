@@ -70,7 +70,7 @@ bitmap{ filename = "Dog5.jpg"; preload = true; } CSDD;  #DogD
 bitmap{ filename = "scale-instruction.bmp"; preload = true; } scale_instruction_bmp;  #instruction for the evaluation
 bitmap{ filename = "scale-rate.bmp"; preload = true; } scale_bmp;  #pleasant scale show for each dog
 bitmap{ filename = "expect-rate.bmp"; preload = true; } expect_bmp;  #expectation scale show for each dog
-wavefile { filename = "snarl.wav"; } snarl;
+wavefile { filename = "snarl.wav"; preload = true;} snarl;
 
 picture {
 		bitmap CSm;
@@ -396,11 +396,9 @@ trial {
 } CSDD_bare_trial;
 
 trial {
-	trial_duration = 2000;
-	trial_type = fixed;
+	trial_duration = 3000;
 	picture CSm_pic;
 	sound {wavefile snarl; }CSm_sound;
-	response_active = true;
 } CSm_trial2;
 
 trial {
