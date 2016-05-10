@@ -67,9 +67,9 @@ bitmap{ filename = "Dog3.jpg"; preload = true; } CSDB;  #DogB
 bitmap{ filename = "Dog4.jpg"; preload = true; } CSDC;  #DogC 
 bitmap{ filename = "Dog5.jpg"; preload = true; } CSDD;  #DogD 
 
-bitmap{ filename = "scale-instruction.bmp"; preload = true; } scale_instruction_bmp;  #instruction for the evaluation
-bitmap{ filename = "scale-rate.bmp"; preload = true; } scale_bmp;  #pleasant scale show for each dog
-bitmap{ filename = "expect-rate.bmp"; preload = true; } expect_bmp;  #expectation scale show for each dog
+bitmap{ filename = "scale-instruction.bmp"; preload = true; } scale_instruction_bmp;  		#instruction for the evaluation
+bitmap{ filename = "scale-rate.bmp"; preload = true; } scale_bmp;  						  		#pleasant scale show for each dog
+bitmap{ filename = "expect-rate.bmp"; preload = true; } expect_bmp;  							#expectation scale show for each dog
 wavefile { filename = "snarl.wav"; preload = true;} snarl;
 
 picture {
@@ -403,10 +403,7 @@ trial {
 
 trial {
 	trial_duration = 3000;
-<<<<<<< HEAD
-=======
 	trial_type = fixed;
->>>>>>> a7f48ba12eb7f1f720a142202e0793fdaeb17c90
 	picture CSm_pic;
 	sound {wavefile snarl; }CSm_sound;
 } CSm_trial2;

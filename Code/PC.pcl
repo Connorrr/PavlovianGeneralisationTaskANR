@@ -30,7 +30,7 @@ int subid = int(logfile.subject());
 output_file out = new output_file;
 out.open(logfile.subject()+"_pc" + ".xls");
 out.print("student number: "+logfile.subject()+"\t"+"Age: "+string(Age)+"\t"+"Gender: "+string(Gender)+"\t"+"Group: "+string(Group_No)+"Stim Group: "+string(Stim_Group) + "\n");	#print the trial index
-out.print("Phase\tTrial Number\tDog\tExtinction Dog\tTrial Type\n");	#print the trial index
+out.print("Phase\tTrial Number\tDog\tExtinction Dog\tTrial Type\tStim Start\tStim End\tStim2 Start\tStim2 End\n");	#print the trial index
 
 #------------------------------------------------------------------------------
 # Setup output port
@@ -77,6 +77,10 @@ begin
 	j=j+1;
 end;*/
 
+CLOCK_START = clock.time_double();
+double start_stim;
+double end_stim;
+
 int phase = 1;
 int dog = 0;
 int rndval = 0;
@@ -102,44 +106,8 @@ welcome_2.present();
 int response_button1;
 int response_button2;
 
-############## Practice Start Here #################
-if (!SKIP_TEST) then
-	CSp_trial.present();
-	if (bool( response_manager.response_count() )) then
-		stimulus_data last = stimulus_manager.last_stimulus_data();
-		CSp_rate_pic.remove_part(2);
-		if (10000-last.reaction_time()>50) then
-		CSp_trial.set_duration(10000-last.reaction_time());
-		end;
-		CSp_trial.present();
-		term.print_line(string( last.reaction_time() ));
-		CSp_rate_pic.insert_part(2, rate_now_text,0, 370);
-	end;
-	dog = 1;
-	#response_button1 = get_response();
-	blank_trial.present();
-	rndval = random(5000, 15000)/SPEED_UP;
-	CSp_rating_trial.set_duration(rndval);
-	#triangle_rating_trial.present();
-
-	CSp_rating_trial.present();
-	if (bool( response_manager.response_count() )) then
-		stimulus_data last = stimulus_manager.last_stimulus_data();
-		response_pic_CSp.remove_part(3);
-		response_pic_CSp.remove_part(2);
-		if (5000-last.reaction_time()>50) then
-		CSp_rating_trial.set_duration(5000-last.reaction_time());
-		end;
-		CSp_rating_trial.present();
-		response_pic_CSp.insert_part(2, reaction_text, 0, 370);
-		response_pic_CSp.insert_part(3, scale_bmp, 0, -425);
-	end;						
-
-	break_trial.present();
-end;
-
 #print_1d_bool_array(IS_CSM);
-
+int iti;		#  Inter trial interval
 phase = 1;
 fixation_trial.set_duration(5000);
 ############## Aquisition Phase ##################
@@ -151,31 +119,34 @@ if (!SKIP_AQUI) then
 		i > NUM_AQUI
 	begin
 		if (i != 1) then
-			fixation_trial.set_duration(random(RAND_WAIT_MIN, RAND_WAIT_MAX));
+			iti = random(RAND_WAIT_MIN, RAND_WAIT_MAX);
+			term.print("duration:  " + string(iti) + "\n");
+			fixation_trial.set_duration(iti);
 		end;
 		fixation_trial.present();
 		
 			if (IS_CSM[i] == false) then
 				#
 				oport.send_code( 2 );
+				start_stim = clock.time_double();
 				CSp_bare_trial.present();
 				oport.send_code( 2 );
+				end_stim = clock.time_double();
 				dog = 1;
 				if (Stim_Group != 1) then
 					dog = 2;
 				end;
 				trial_type = "CS-";
 			else
-<<<<<<< HEAD
 				#oport.send_code( 1 );
 				#CSm_bare_trial.present();
-=======
 				oport.send_code( 1 );
+				start_stim = clock.time_double();
 				CSm_short_bare_trial.present();
->>>>>>> a7f48ba12eb7f1f720a142202e0793fdaeb17c90
 				oport.send_code( 64 );
 				CSm_trial2.present();
 				oport.send_code( 1 );
+				end_stim = clock.time_double();
 				dog = 2;
 				if (Stim_Group != 1) then
 					dog = 1;
@@ -187,7 +158,7 @@ if (!SKIP_AQUI) then
 			#blank_trial.present();
 		
 		#"Phase\tTrial Number\tDog\tExpectancy\tEvaluation\n"
-		save_trail_data(phase, i, dog, out, trial_type);
+		save_trail_data(phase, i, dog, out, trial_type, start_stim, end_stim);
 		term.print("\n");
 		i = i + 1;
 	end;
@@ -204,6 +175,8 @@ int dog2 = 0;
 term.print_line("CSDA:");
 print_1d_bool_array(IS_CSDA);
 fixation_trial.set_duration(5000);
+double start_stim2;
+double end_stim2;
 ############## Extinction  Phase ##################
 if (!SKIP_EXTINCT) then
 	loop 
@@ -216,8 +189,10 @@ if (!SKIP_EXTINCT) then
 		
 			if (IS_CSM[i] == false) then 
 				oport.send_code( 2 );
+				start_stim = clock.time_double();
 				CSp_bare_trial.present();
 				oport.send_code( 2 );
+				end_stim = clock.time_double();
 				
 				dog = 1;
 				if (Stim_Group != 1) then
@@ -226,8 +201,10 @@ if (!SKIP_EXTINCT) then
 				trial_type = "CS-";
 			else
 				oport.send_code( 1 );
+				start_stim = clock.time_double();
 				CSm_bare_trial.present();
 				oport.send_code( 1 );
+				end_stim = clock.time_double();
 				dog = 2;
 				if (Stim_Group != 1) then
 					dog = 1;
@@ -239,21 +216,25 @@ if (!SKIP_EXTINCT) then
 				fixation_trial.set_duration(15000);
 				fixation_trial.present();
 				oport.send_code( 4 );
+				start_stim2 = clock.time_double();
 				CSDA_bare_trial.present();
 				oport.send_code( 4 );
+				end_stim2 = clock.time_double();
 				dog2 = 3;
 			else
 				fixation_trial.set_duration(15000);
 				fixation_trial.present();
 				oport.send_code( 8 );
+				start_stim2 = clock.time_double();
 				CSDB_bare_trial.present();
 				oport.send_code( 8 );
+				end_stim2 = clock.time_double();
 				dog2 = 4;
 			end;
 			#blank_trial.present();
 		
 		#"Phase\tTrial Number\tDog\tDog2\n"
-		save_extinction_trail_data(phase, i, dog, out, dog2, trial_type);
+		save_extinction_trail_data(phase, i, dog, out, dog2, trial_type, start_stim, end_stim, start_stim2, end_stim2);
 		term.print("\n");
 		i = i + 1;
 	end;	
@@ -285,6 +266,7 @@ build_test_stim_list(NUM_GENERALISATION, IS_CSDC, Group_No);
 CSm_trial.set_duration(10000/SPEED_UP);
 phase = 3;
 print_1d_bool_array(IS_CSDC);
+fixation_trial.set_duration(5000);
 #################### Generalisation  Phase ##################
 if (!SKIP_GEN)then
 	loop 
@@ -292,20 +274,28 @@ if (!SKIP_GEN)then
 	until 
 		i > NUM_GENERALISATION
 	begin
-		fixation_trial.set_duration(random(RAND_WAIT_MIN, RAND_WAIT_MAX));
+		if (i != 1)then
+			iti = random(RAND_WAIT_MIN2, RAND_WAIT_MAX2);
+			term.print("duration:  " + string(iti) + "\n");
+			fixation_trial.set_duration(iti);
+		end;
 		fixation_trial.present();
 		
 			if (IS_CSDC[i] == false) then 
 				oport.send_code( 16 );
+				start_stim = clock.time_double();
 				CSDC_bare_trial.present();
 				oport.send_code( 16 );
+				end_stim = clock.time_double();
 				
 				dog = 5;
 				trial_type = "CSDC";
 			else
 				oport.send_code( 32 );
+				start_stim = clock.time_double();
 				CSDD_bare_trial.present();
 				oport.send_code( 32 );
+				end_stim = clock.time_double();
 				
 				dog = 6;
 				trial_type = "CSDD";
@@ -313,7 +303,7 @@ if (!SKIP_GEN)then
 			#blank_trial.present();
 			
 		#"Phase\tTrial Number\tDog\tExpectancy\tEvaluation\n"
-		save_trail_data(phase, i, dog, out, trial_type);
+		save_trail_data(phase, i, dog, out, trial_type, start_stim, end_stim);
 		term.print("\n");
 		i = i + 1;
 	end;	
@@ -324,19 +314,26 @@ build_test_stim_list(NUM_GENERALISATION, IS_CSM_TEST, Group_No);
 CSm_trial.set_duration(10000/SPEED_UP);
 phase = 4;
 print_1d_bool_array(IS_CSM_TEST);
+fixation_trial.set_duration(5000);
 #################### Test  Phase ##################
 loop 
 	int i = 1;
 until 
 	i > NUM_TEST_EXT
 begin
-	fixation_trial.set_duration(random(RAND_WAIT_MIN, RAND_WAIT_MAX));
-	fixation_trial.present();
+		if (i != 1)then
+			iti = random(RAND_WAIT_MIN2, RAND_WAIT_MAX2);
+			term.print("duration:  " + string(iti) + "\n");
+			fixation_trial.set_duration(iti);
+		end;
+		fixation_trial.present();
 	
 		if (IS_CSM_TEST[i] == false) then 
 			oport.send_code( 2 );
+			start_stim = clock.time_double();
 			CSp_bare_trial.present();
 			oport.send_code( 2 );
+			end_stim = clock.time_double();
 			
 			dog = 1;
 			if (Stim_Group != 1) then
@@ -345,8 +342,10 @@ begin
 			trial_type = "CS-";
 		else
 			oport.send_code( 1 );
+			start_stim = clock.time_double();
 			CSm_bare_trial.present();
 			oport.send_code( 1 );
+			end_stim = clock.time_double();
 			dog = 2;
 			if (Stim_Group != 1) then
 				dog = 1;
@@ -356,7 +355,7 @@ begin
 		#blank_trial.present();
 		
 	#"Phase\tTrial Number\tDog\tExpectancy\tEvaluation\n"
-	save_trail_data(phase, i, dog, out, trial_type);
+	save_trail_data(phase, i, dog, out, trial_type, start_stim, end_stim);
 	term.print("\n");
 	i = i + 1;
 end;	

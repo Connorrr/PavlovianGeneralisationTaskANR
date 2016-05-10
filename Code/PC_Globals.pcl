@@ -11,14 +11,17 @@
 int PIXELS_PER_CM = 38; 	#pixels per cm
 int SPEED_UP = 1;				#speed up trial duration.  1 = normal time.
 int NUM_AQUI = 24;	
-int NUM_GENERALISATION = 4;
+int NUM_GENERALISATION = 8;
 int NUM_EXTINCT = 24;
 int NUM_REIN = 3;
 int NUM_TEST = 6;
-int NUM_TEST_EXT = 4;
+int NUM_TEST_EXT = 8;
 
 int RAND_WAIT_MIN = 15000;
 int RAND_WAIT_MAX = 25000;
+
+int RAND_WAIT_MIN2 = 15000;
+int RAND_WAIT_MAX2 = 25000;
 
 #### Globals for Pavlovian Conditioning ####
 array <bool> IS_CSM[24];
@@ -45,6 +48,7 @@ int NUM_ATTRACTIVE_TRIALS = 32;
 int NUM_RECOG_TRIALS = 32;
 double PIC_WIDTH = 6.0;			#in CM.  DECIMAL POINT MUST REMAIN
 double PIC_HEIGHT = 6.0;		#in CM.	DECIMAL POINT MUST REMAIN
+double CLOCK_START;
 
 
 
